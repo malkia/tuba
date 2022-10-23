@@ -54,7 +54,7 @@ void metrics_test()
 
 	ExportMetricsServiceResponse response;
 
-	auto clientContext{ ::grpc::ClientContext() };
+	::grpc::ClientContext clientContext;
 	const auto channel{ ::grpc::CreateChannel("localhost:50051", ::grpc::InsecureChannelCredentials()) };
 	const auto metricsService{ MetricsService::NewStub(channel) };
 	const auto status{ metricsService->Export(&clientContext, request, &response ) };
