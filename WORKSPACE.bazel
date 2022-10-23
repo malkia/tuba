@@ -9,3 +9,15 @@ http_archive(
     build_file = "@//:opentelemetry_proto.BUILD.bazel",
     sha256 = "464bc2b348e674a1a03142e403cbccb01be8655b6de0f8bfe733ea31fcd421be"
 )
+
+# For the time being grpc is loaded the oldway, not through bzlmod
+http_archive(
+    name = "com_github_grpc_grpc",
+    strip_prefix = "grpc-1.50.0",
+    sha256 = "76900ab068da86378395a8e125b5cc43dfae671e09ff6462ddfef18676e2165a",
+    urls = ["https://github.com/grpc/grpc/archive/refs/tags/v1.50.0.tar.gz"],
+)
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
+grpc_deps()
+load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
+grpc_extra_deps()

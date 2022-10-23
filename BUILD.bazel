@@ -12,5 +12,10 @@ cc_binary(
         "@opentelemetry_proto//:logs_service_cc_proto",
         "@opentelemetry_proto//:trace_service_cc_proto",
         "@opentelemetry_proto//:metrics_service_cc_proto",
+        "@opentelemetry_proto//:logs_service_cc_grpc",
+        "@opentelemetry_proto//:metrics_service_cc_grpc",
+        "@opentelemetry_proto//:trace_service_cc_grpc",
+        "@com_github_grpc_grpc//:grpc++_unsecure",
     ]
 )
+

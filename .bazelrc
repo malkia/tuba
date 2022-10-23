@@ -2,6 +2,8 @@ common --announce_rc
 common --enable_platform_specific_config
 build --experimental_enable_bzlmod
 
+build:linux --cxxopt='-std=c++17'
+
 startup --windows_enable_symlinks
 # build --experimental_repository_resolved_file=resolved.bzl
 
@@ -35,10 +37,8 @@ build --incompatible_disable_native_apple_binary_rule
 build --incompatible_disable_runtimes_filegroups
 build --incompatible_disable_target_provider_fields
 build --incompatible_disable_third_party_license_checking
-build --incompatible_disallow_empty_glob
 build --incompatible_disallow_legacy_javainfo
 build --incompatible_disallow_legacy_py_provider
-build --incompatible_disallow_struct_provider_syntax
 build --incompatible_do_not_split_linking_cmdline
 build --incompatible_dont_emit_static_libgcc
 build --incompatible_dont_enable_host_nonhost_crosstool_features

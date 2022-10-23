@@ -1,17 +1,27 @@
 #include <stdio.h>
 
+#include "grpcpp/grpcpp.h"
+
 #include "opentelemetry/proto/collector/logs/v1/logs_service.pb.h"
 #include "opentelemetry/proto/collector/trace/v1/trace_service.pb.h"
 #include "opentelemetry/proto/collector/metrics/v1/metrics_service.pb.h"
 
-extern "C" __declspec(dllexport) void metrics_test()
+#include "opentelemetry/proto/collector/logs/v1/logs_service.grpc.pb.h"
+#include "opentelemetry/proto/collector/trace/v1/trace_service.grpc.pb.h"
+#include "opentelemetry/proto/collector/metrics/v1/metrics_service.grpc.pb.h"
+
+extern "C"
+#ifdef _WIN32
+ __declspec(dllexport) 
+#endif
+void metrics_test()
 {
 	using namespace opentelemetry::proto::collector::metrics::v1;
 	using namespace opentelemetry::proto::metrics::v1;
 
 	NumberDataPoint numberDataPoint;
 
-	int64_t now{ time(NULL) * 1000000000i64 };
+	int64_t now{ time(NULL) * 1000000000LL };
 
 	numberDataPoint.set_start_time_unix_nano( now );
 	numberDataPoint.set_time_unix_nano( now );
@@ -44,9 +54,10 @@ extern "C" __declspec(dllexport) void metrics_test()
 
 	ExportMetricsServiceResponse response;
 
-#if 0
-	const auto metricsService{ MetricsService::NewStub(grpcChannel) };
-	const auto status{ metricsService->Export(&grpcClientContext, request, &response ) };
+	auto clientContext{ ::grpc::ClientContext() };
+	auto channel{ ::grpc::CreateChannel("localhost:50051", ::grpc::InsecureChannelCredentials()) };
+	const auto metricsService{ MetricsService::NewStub(channel) };
+	const auto status{ metricsService->Export(&clientContext, request, &response ) };
 	if( !status.ok() )
 	{
 		printf( "error code:    %d\n", status.error_code() );
@@ -60,12 +71,10 @@ extern "C" __declspec(dllexport) void metrics_test()
 		printf( "  partial_success.rejected_data_points = %zd\n", response.partial_success().rejected_data_points() );
 		printf( "  error_message = [%s]\n", response.partial_success().error_message().c_str() );
 	}
-#endif
 }
 
 int main()
 {
 	metrics_test();
-	printf("something\n");
 	return 0;
 }

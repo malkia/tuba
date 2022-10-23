@@ -1,5 +1,6 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -40,6 +41,12 @@ cc_proto_library(
     name = "logs_service_cc_proto",
     deps = [":logs_service_proto"],
 )
+cc_grpc_library(
+    name = "logs_service_cc_grpc",
+    srcs = [":logs_service_proto"],
+    deps = [":logs_service_cc_proto"],
+    grpc_only = True,
+)
 
 proto_library(
     name = "metrics_proto",
@@ -59,6 +66,12 @@ cc_proto_library(
     name = "metrics_service_cc_proto",
     deps = [":metrics_service_proto"],
 )
+cc_grpc_library(
+    name = "metrics_service_cc_grpc",
+    srcs = [":metrics_service_proto"],
+    deps = [":metrics_service_cc_proto"],
+    grpc_only = True,
+)
 
 proto_library(
     name = "trace_proto",
@@ -77,4 +90,10 @@ proto_library(
 cc_proto_library(
     name = "trace_service_cc_proto",
     deps = [":trace_service_proto"],
+)
+cc_grpc_library(
+    name = "trace_service_cc_grpc",
+    srcs = [":trace_service_proto"],
+    deps = [":trace_service_cc_proto"],
+    grpc_only = True,
 )
