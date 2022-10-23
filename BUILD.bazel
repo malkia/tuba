@@ -1,0 +1,16 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_binary(
+    name = "something",
+    srcs = ["something.cpp"],
+    deps = [
+        "@opentelemetry_proto//:logs_cc_proto",
+        "@opentelemetry_proto//:trace_cc_proto",
+        "@opentelemetry_proto//:metrics_cc_proto",
+        "@opentelemetry_proto//:logs_service_cc_proto",
+        "@opentelemetry_proto//:trace_service_cc_proto",
+        "@opentelemetry_proto//:metrics_service_cc_proto",
+    ]
+)

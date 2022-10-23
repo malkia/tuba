@@ -1,0 +1,80 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+
+package(default_visibility = ["//visibility:public"])
+
+proto_library(
+    name = "common_proto",
+    srcs = ["opentelemetry/proto/common/v1/common.proto"],
+)
+cc_proto_library(
+    name = "common_cc_proto",
+    deps = [":common_proto"],
+)
+
+proto_library(
+    name = "resource_proto",
+    deps = [":common_proto"],
+    srcs = ["opentelemetry/proto/resource/v1/resource.proto"],
+)
+cc_proto_library(
+    name = "resource_cc_proto",
+    deps = [":resource_proto"],
+)
+
+proto_library(
+    name = "logs_proto",
+    deps = [":common_proto", ":resource_proto"],
+    srcs = ["opentelemetry/proto/logs/v1/logs.proto"],
+)
+cc_proto_library(
+    name = "logs_cc_proto",
+    deps = [":logs_proto"],
+)
+proto_library(
+    name = "logs_service_proto",
+    deps = [":logs_proto"],
+    srcs = ["opentelemetry/proto/collector/logs/v1/logs_service.proto"],
+)
+cc_proto_library(
+    name = "logs_service_cc_proto",
+    deps = [":logs_service_proto"],
+)
+
+proto_library(
+    name = "metrics_proto",
+    deps = [":common_proto", ":resource_proto"],
+    srcs = ["opentelemetry/proto/metrics/v1/metrics.proto"],
+)
+cc_proto_library(
+    name = "metrics_cc_proto",
+    deps = [":metrics_proto"],
+)
+proto_library(
+    name = "metrics_service_proto",
+    deps = [":metrics_proto"],
+    srcs = ["opentelemetry/proto/collector/metrics/v1/metrics_service.proto"],
+)
+cc_proto_library(
+    name = "metrics_service_cc_proto",
+    deps = [":metrics_service_proto"],
+)
+
+proto_library(
+    name = "trace_proto",
+    deps = [":common_proto", ":resource_proto"],
+    srcs = ["opentelemetry/proto/trace/v1/trace.proto"],
+)
+cc_proto_library(
+    name = "trace_cc_proto",
+    deps = [":trace_proto"],
+)
+proto_library(
+    name = "trace_service_proto",
+    deps = [":trace_proto"],
+    srcs = ["opentelemetry/proto/collector/trace/v1/trace_service.proto"],
+)
+cc_proto_library(
+    name = "trace_service_cc_proto",
+    deps = [":trace_service_proto"],
+)

@@ -1,0 +1,79 @@
+common --announce_rc
+common --enable_platform_specific_config
+build --experimental_enable_bzlmod
+
+startup --windows_enable_symlinks
+# build --experimental_repository_resolved_file=resolved.bzl
+
+# User, temp, repo & disk cache folders
+startup --output_user_root=../.out/user
+common --repository_cache=../.out/repo
+build --disk_cache=../.out/disk
+
+# Hmm yes
+
+common --experimental_repository_cache_hardlinks
+build --nolegacy_external_runfiles
+build --nobuild_runfile_links
+build --experimental_convenience_symlinks=clean
+build --experimental_remotable_source_manifests=true
+build --experimental_cc_shared_library 
+build --experimental_disable_external_package
+
+
+# these were found by doing
+# bazel(isk) -migrate build -k ...
+build --incompatible_always_check_depset_elements
+build --incompatible_avoid_conflict_dlls
+build --incompatible_config_setting_private_default_visibility
+build --incompatible_default_to_explicit_init_py
+build --incompatible_depset_for_libraries_to_link_getter
+build --incompatible_disable_depset_items
+build --incompatible_disable_expand_if_all_available_in_flag_set
+build --incompatible_disable_native_android_rules
+build --incompatible_disable_native_apple_binary_rule
+build --incompatible_disable_runtimes_filegroups
+build --incompatible_disable_target_provider_fields
+build --incompatible_disable_third_party_license_checking
+build --incompatible_disallow_empty_glob
+build --incompatible_disallow_legacy_javainfo
+build --incompatible_disallow_legacy_py_provider
+build --incompatible_disallow_struct_provider_syntax
+build --incompatible_do_not_split_linking_cmdline
+build --incompatible_dont_emit_static_libgcc
+build --incompatible_dont_enable_host_nonhost_crosstool_features
+build --incompatible_dont_use_javasourceinfoprovider
+build --incompatible_enable_android_toolchain_resolution
+build --incompatible_enable_exports_provider
+build --incompatible_enforce_config_setting_visibility
+build --incompatible_exclusive_test_sandboxed
+build --incompatible_existing_rules_immutable_view
+build --incompatible_force_strict_header_check_from_starlark
+build --incompatible_java_common_parameters
+build --incompatible_legacy_local_fallback
+build --incompatible_linkopts_in_user_link_flags
+build --incompatible_linkopts_to_linklibs
+build --incompatible_make_thinlto_command_lines_standalone
+build --incompatible_merge_genfiles_directory
+build --incompatible_new_actions_api
+build --incompatible_no_attr_license
+build --incompatible_no_implicit_file_export
+build --incompatible_py2_outputs_are_suffixed
+build --incompatible_py3_is_default
+build --incompatible_remote_build_event_upload_respect_no_cache
+build --incompatible_remote_output_paths_relative_to_input_root
+build --incompatible_remote_results_ignore_disk
+build --incompatible_remote_symlinks
+build --incompatible_remove_cpu_and_compiler_attributes_from_cc_toolchain
+build --incompatible_remove_legacy_whole_archive
+build --incompatible_require_ctx_in_configure_features
+build --incompatible_require_linker_input_cc_api
+build --incompatible_run_shell_command_string
+build --incompatible_strict_action_env
+build --incompatible_struct_has_no_methods
+build --incompatible_top_level_aspects_require_providers
+build --incompatible_use_cc_configure_from_rules_cc
+build --incompatible_use_platforms_repo_for_constraints
+build --incompatible_use_python_toolchains
+build --incompatible_validate_top_level_header_inclusions
+build --incompatible_visibility_private_attributes_at_definition
