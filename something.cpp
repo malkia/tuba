@@ -21,7 +21,7 @@ void metrics_test()
 
 	NumberDataPoint numberDataPoint;
 
-	int64_t now{ time(NULL) * 1000000000LL };
+	const auto now{ time(nullptr) * 1000000000LL };
 
 	numberDataPoint.set_start_time_unix_nano( now );
 	numberDataPoint.set_time_unix_nano( now );
@@ -55,7 +55,7 @@ void metrics_test()
 	ExportMetricsServiceResponse response;
 
 	auto clientContext{ ::grpc::ClientContext() };
-	auto channel{ ::grpc::CreateChannel("localhost:50051", ::grpc::InsecureChannelCredentials()) };
+	const auto channel{ ::grpc::CreateChannel("localhost:50051", ::grpc::InsecureChannelCredentials()) };
 	const auto metricsService{ MetricsService::NewStub(channel) };
 	const auto status{ metricsService->Export(&clientContext, request, &response ) };
 	if( !status.ok() )
