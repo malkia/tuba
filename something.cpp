@@ -10,6 +10,8 @@
 #include "opentelemetry/proto/collector/trace/v1/trace_service.grpc.pb.h"
 #include "opentelemetry/proto/collector/metrics/v1/metrics_service.grpc.pb.h"
 
+// https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/protocol/otlp.md
+
 extern "C"
 #ifdef _WIN32
  __declspec(dllexport) 

@@ -7,6 +7,10 @@ directories:
 derive_targets_from_directories: true
 
 targets:
+  @opentelemetry_proto//...
+  @com_github_grpc_grpc//...
+  -@com_google_absl//...
+  -@grpc_python_dependencies//...
   # If source code isn't resolving, add additional targets that compile it here
 
 additional_languages:
@@ -15,3 +19,5 @@ additional_languages:
   # javascript
   # python
   # typescript
+
+workspace_type: c
